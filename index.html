@@ -3,688 +3,814 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Salman Ul Farisi | Hospitality Systems Architect</title>
+    <title>Salman Ul Farisi — Operations Strategist & Restaurant Systems Consultant</title>
+    <meta name="description" content="Salman Ul Farisi is a world-class Hospitality Operations Strategist and Restaurant Systems Consultant specializing in menu engineering, operational excellence, and F&B innovation.">
+    <meta name="keywords" content="restaurant consultant, operations strategist, menu engineering, hospitality, F&B systems, Salman Ul Farisi, Gustavo Food Engineering">
+    <meta name="author" content="Salman Ul Farisi">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --bg-dark: #0a0a0c;
-            --bg-card: rgba(20, 20, 25, 0.75);
-            --accent-gold: #d4af37;
-            --accent-copper: #b87333;
-            --text-main: #f3f4f6;
-            --text-muted: #9ca3af;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            scroll-behavior: smooth;
-        }
-
-        body, html {
-            width: 100%;
-            background-color: var(--bg-dark);
-            font-family: 'Inter', sans-serif;
-            color: var(--text-main);
-            overflow-x: hidden;
-        }
-
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: var(--bg-dark); }
-        ::-webkit-scrollbar-thumb { background: var(--accent-copper); border-radius: 3px; }
-
-        /* Fixed 3D Viewport Layer */
-        #canvas-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-            z-index: 1;
-            pointer-events: none;
-        }
-
-        /* Fixed HUD Instruction */
-        .scroller-hud {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            z-index: 10;
-            font-size: 0.75rem;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            color: var(--accent-gold);
-            opacity: 0.6;
-            animation: pulse 2s infinite ease-in-out;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 0.3; }
-            50% { opacity: 0.8; }
-        }
-
-        /* Luxury Navigation */
-        nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            padding: 1.5rem 3rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 100;
-            background: rgba(10, 10, 12, 0.85);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
-        }
-        .logo {
-            font-family: 'Cinzel', serif;
-            font-weight: 600;
-            font-size: 1.2rem;
-            letter-spacing: 0.2em;
-            color: #ffffff;
-            text-transform: uppercase;
-        }
-        .logo span { color: var(--accent-gold); }
-        .nav-links { display: flex; gap: 2.5rem; list-style: none; }
-        .nav-links a {
-            color: var(--text-muted);
-            text-decoration: none;
-            font-size: 0.85rem;
-            font-weight: 500;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            transition: color 0.4s ease;
-        }
-        .nav-links a:hover { color: var(--accent-gold); }
-
-        .page-container {
-            position: relative;
-            z-index: 2;
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        /* Sections Styling */
-        section {
-            padding: 12rem 0;
-            opacity: 0;
-            transform: translateY(40px);
-            transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        section.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .hero {
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: flex-start;
-            padding-top: 4rem;
-        }
-        .hero-badge {
-            font-size: 0.8rem;
-            letter-spacing: 0.3em;
-            text-transform: uppercase;
-            color: var(--accent-gold);
-            margin-bottom: 1.5rem;
-            border-left: 2px solid var(--accent-copper);
-            padding-left: 1rem;
-        }
-        h1 {
-            font-family: 'Cinzel', serif;
-            font-size: 4.5rem;
-            font-weight: 400;
-            letter-spacing: -0.02em;
-            line-height: 1.1;
-            margin-bottom: 1.5rem;
-            background: linear-gradient(135deg, #ffffff 60%, var(--accent-gold));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .hero-tagline {
-            font-size: 1.4rem;
-            font-weight: 300;
-            color: var(--text-muted);
-            max-width: 700px;
-            line-height: 1.6;
-            margin-bottom: 3rem;
-        }
-        .btn-group { display: flex; gap: 1.5rem; }
-        .btn {
-            padding: 1rem 2.5rem;
-            font-size: 0.85rem;
-            font-weight: 600;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            text-decoration: none;
-            border-radius: 2px;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .btn-primary {
-            background: linear-gradient(135deg, var(--accent-copper), var(--accent-gold));
-            color: #000;
-            border: none;
-        }
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
-        }
-        .btn-secondary {
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: #ffffff;
-        }
-        .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.05);
-            border-color: var(--accent-gold);
-            color: var(--accent-gold);
-        }
-
-        .section-header { margin-bottom: 5rem; }
-        .section-subtitle {
-            font-size: 0.8rem;
-            letter-spacing: 0.2em;
-            color: var(--accent-copper);
-            text-transform: uppercase;
-            margin-bottom: 0.5rem;
-            display: block;
-        }
-        .section-title { font-family: 'Cinzel', serif; font-size: 2.5rem; font-weight: 400; }
-
-        /* Structural Cards Layout */
-        .grid-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 2rem;
-        }
-        .glass-card {
-            background: var(--bg-card);
-            border: 1px solid rgba(255, 255, 255, 0.03);
-            border-top: 1px solid rgba(212, 175, 55, 0.1);
-            padding: 3rem 2rem;
-            backdrop-filter: blur(20px);
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .glass-card:hover {
-            border-color: rgba(212, 175, 55, 0.3);
-            transform: translateY(-5px);
-        }
-        .glass-card h3 { font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem; }
-        .glass-card p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; }
-
-        /* Interactive Skills Matrix */
-        .skills-wrapper { display: flex; flex-wrap: wrap; gap: 1rem; }
-        .skill-badge {
-            background: rgba(20, 20, 25, 0.8);
-            border: 1px solid rgba(255,255,255, 0.05);
-            padding: 0.8rem 1.5rem;
-            font-size: 0.9rem;
-            letter-spacing: 0.05em;
-            color: var(--text-main);
-            transition: all 0.3s ease;
-        }
-        .skill-badge:hover {
-            border-color: var(--accent-gold);
-            color: var(--accent-gold);
-            background: rgba(212, 175, 55, 0.05);
-        }
-
-        /* Journey Timeline */
-        .timeline { position: relative; max-width: 900px; margin: 0 auto; }
-        .timeline::before {
-            content: ''; position: absolute; left: 50%; width: 1px; height: 100%;
-            background: rgba(255, 255, 255, 0.05); top: 0; transform: translateX(-50%);
-        }
-        .timeline-item { padding: 3rem 0; width: 50%; position: relative; }
-        .timeline-item:nth-child(even) { left: 50%; padding-left: 3rem; }
-        .timeline-item:nth-child(odd) { left: 0; padding-right: 3rem; text-align: right; }
-        .timeline-badge {
-            position: absolute; top: 3.5rem; left: 100%; width: 12px; height: 12px;
-            border-radius: 50%; background: var(--accent-gold); border: 2px solid var(--bg-dark);
-            transform: translateX(-50%); z-index: 10;
-        }
-        .timeline-item:nth-child(even) .timeline-badge { left: 0; }
-        .timeline-year { font-family: 'Cinzel', serif; font-size: 2rem; color: var(--accent-gold); margin-bottom: 0.5rem; display: block; }
-        .timeline-content { background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.03); padding: 2rem; border-radius: 4px; }
-
-        /* Full Screen Quote Visual */
-        .fullscreen-quote {
-            height: 80vh; display: flex; flex-direction: column; justify-content: center;
-            align-items: center; text-align: center;
-        }
-        .quote-text { font-family: 'Cinzel', serif; font-size: 2.8rem; line-height: 1.4; max-width: 900px; color: #ffffff; margin-bottom: 2rem; }
-
-        /* Editorial Insights Layout */
-        .blog-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 2rem; }
-        .blog-card { background: rgba(255, 255, 255, 0.01); border: 1px solid rgba(255,255,255, 0.04); padding: 2.5rem 2rem; transition: all 0.4s ease; }
-        .blog-card:hover { background: rgba(255, 255, 255, 0.03); border-color: var(--accent-copper); }
-
-        /* Premium Form Layout */
-        .contact-container { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
-        .contact-info h3 { font-family: 'Cinzel', serif; font-size: 1.8rem; margin-bottom: 1.5rem; }
-        .contact-details { margin-top: 2rem; list-style: none; }
-        .contact-details li { margin-bottom: 1rem; color: var(--text-muted); }
-        .contact-form form { display: flex; flex-direction: column; gap: 1.5rem; }
-        .form-group input, .form-group textarea {
-            width: 100%; padding: 1rem; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08);
-            color: #ffffff; font-family: 'Inter', sans-serif; font-size: 0.95rem; transition: border-color 0.4s ease;
-        }
-        .form-group input:focus, .form-group textarea:focus { outline: none; border-color: var(--accent-gold); }
-
-        footer {
-            padding: 4rem 0; text-align: center; color: #4b5563; font-size: 0.85rem;
-            letter-spacing: 0.1em; border-top: 1px solid rgba(255, 255, 255, 0.03); margin-top: 5rem;
-        }
-
-        @media (max-width: 968px) {
-            h1 { font-size: 3rem; }
-            .timeline::before { left: 0; }
-            .timeline-item { width: 100%; left: 0 !important; padding-left: 2rem !important; padding-right: 0 !important; text-align: left !important; }
-            .timeline-badge { left: 0 !important; }
-            .contact-container { grid-template-columns: 1fr; gap: 3rem; }
-            nav { padding: 1.5rem; }
-            .nav-links { display: none; }
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-    <!-- 3D Viewport Matrix Layer -->
-    <div id="canvas-container"></div>
-    <div class="scroller-hud">Scroll to Deconstruct System Architecture</div>
-
-    <!-- Navigation Header -->
-    <nav>
-        <div class="logo">Salman <span>Ul Farisi</span></div>
-        <ul class="nav-links">
-            <li><a href="#about">Profile</a></li>
-            <li><a href="#expertise">Expertise</a></li>
-            <li><a href="#journey">Journey</a></li>
-            <li><a href="#gustavo">Gustavo</a></li>
-            <li><a href="#projects">Frameworks</a></li>
-            <li><a href="#technology">Vision</a></li>
-            <li><a href="#insights">Insights</a></li>
-            <li><a href="#contact">Connect</a></li>
-        </ul>
+    <!-- ═══════════════ NAVIGATION ═══════════════ -->
+    <nav class="nav" id="nav">
+        <div class="nav-inner">
+            <a href="#hero" class="nav-logo">
+                <span class="logo-accent">S</span>UF
+            </a>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#about">About</a></li>
+                <li><a href="#expertise">Expertise</a></li>
+                <li><a href="#journey">Journey</a></li>
+                <li><a href="#gustavo">Gustavo</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#tech-vision">Technology</a></li>
+                <li><a href="#insights">Insights</a></li>
+                <li><a href="#contact" class="nav-cta">Let's Connect</a></li>
+            </ul>
+        </div>
     </nav>
 
-    <div class="page-container">
-        
-        <!-- Hero Stage -->
-        <section class="hero visible" id="home">
-            <div class="hero-badge">Operations Strategist &bull; Systems Architect</div>
-            <h1>Salman Ul Farisi</h1>
-            <div class="hero-tagline">Engineering smarter restaurants through data systems, structured technology, operational excellence, and continuous optimization metrics.</div>
-            <div class="btn-group">
-                <a href="#projects" class="btn btn-primary">Explore My Work</a>
-                <a href="#contact" class="btn btn-secondary">Let's Connect</a>
+    <!-- ═══════════════ HERO SECTION ═══════════════ -->
+    <section class="hero" id="hero">
+        <div class="hero-bg">
+            <img src="images/hero-bg.png" alt="" class="hero-bg-img">
+            <div class="hero-overlay"></div>
+            <canvas id="heroCanvas" class="hero-canvas"></canvas>
+        </div>
+        <div class="hero-content">
+            <div class="hero-badge reveal">
+                <span class="badge-dot"></span>
+                Available for Strategic Consulting
             </div>
-        </section>
+            <h1 class="hero-name reveal reveal-delay-1">
+                Salman Ul Farisi
+            </h1>
+            <div class="hero-roles reveal reveal-delay-2">
+                <span class="role-line" id="typedRole"></span>
+                <span class="cursor">|</span>
+            </div>
+            <p class="hero-tagline reveal reveal-delay-3">
+                Engineering smarter restaurants through systems, technology,<br>
+                operational excellence, and continuous improvement.
+            </p>
+            <div class="hero-ctas reveal reveal-delay-4">
+                <a href="#projects" class="btn btn-primary">
+                    <span>Explore My Work</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+                <a href="#contact" class="btn btn-secondary">
+                    <span>Let's Connect</span>
+                </a>
+            </div>
+        </div>
+        <div class="hero-scroll-indicator">
+            <div class="scroll-line"></div>
+            <span>Scroll</span>
+        </div>
+    </section>
 
-        <!-- Profile Briefing -->
-        <section id="about">
-            <div class="section-header">
-                <span class="section-subtitle">Who I Am</span>
-                <h2 class="section-title">Architecting Operational Resiliency</h2>
+    <!-- ═══════════════ ABOUT SECTION ═══════════════ -->
+    <section class="section section-dark" id="about">
+        <div class="container">
+            <div class="section-label reveal">
+                <span class="label-line"></span>
+                <span>About</span>
             </div>
-            <div style="max-width: 800px; font-size: 1.2rem; font-weight: 300; line-height: 1.8; color: var(--text-muted);">
-                <p style="margin-bottom: 2rem;">I am an Operations Strategist specializing in restaurant systems, operational excellence, menu engineering, process optimization, and hospitality innovation. My professional journey began deep inside fluid restaurant operations, where I quickly discovered that world-class restaurants are not built only by great food—they are built by intelligent systems.</p>
-                <p>Starting from an fundamental operational role, I progressed systematically into enterprise restaurant management before founding <strong style="color: var(--accent-gold);">Gustavo Food Engineering</strong>. Today, my ultimate long-term vision is to systematically bridge traditional hospitality with modern automation pipelines, artificial intelligence, and completely data-driven operational management architectures.</p>
+            <div class="about-grid">
+                <div class="about-content">
+                    <h2 class="section-title reveal">Who I Am</h2>
+                    <div class="about-text">
+                        <p class="reveal">I am <strong>Salman Ul Farisi</strong>, an Operations Strategist specializing in restaurant systems, operational excellence, menu engineering, process optimization, and hospitality innovation.</p>
+                        <p class="reveal">My professional journey began inside restaurant operations, where I quickly discovered that successful restaurants are not built only by great food—they are built by <strong>intelligent systems</strong>.</p>
+                        <p class="reveal">Starting from an operational role, I progressed into restaurant management before founding <strong>Gustavo Food Engineering</strong>, where I dedicated my work to helping restaurants improve efficiency through structured operations, documentation, workflow engineering, and process improvement.</p>
+                        <p class="reveal">My long-term vision is to bridge hospitality with technology, automation, artificial intelligence, and data-driven operational management.</p>
+                    </div>
+                </div>
+                <div class="about-image reveal">
+                    <div class="about-img-wrapper">
+                        <img src="images/restaurant.png" alt="Luxury restaurant interior">
+                        <div class="about-img-overlay"></div>
+                    </div>
+                </div>
             </div>
-        </section>
+            <div class="about-philosophy reveal">
+                <div class="philosophy-card glass-card">
+                    <div class="philosophy-icon">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z"/><path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"/></svg>
+                    </div>
+                    <blockquote>
+                        Great restaurants don't happen by accident.<br>
+                        <strong>They are engineered.</strong>
+                    </blockquote>
+                    <cite>— My Philosophy</cite>
+                </div>
+            </div>
+        </div>
+    </section>
 
-        <!-- Expertise Node Mesh -->
-        <section id="expertise">
-            <div class="section-header">
-                <span class="section-subtitle">Capabilities Matrix</span>
-                <h2 class="section-title">Core Competencies</h2>
+    <!-- ═══════════════ STATS SECTION ═══════════════ -->
+    <section class="section section-stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item reveal">
+                    <span class="stat-number" data-target="6">0</span><span class="stat-suffix">+</span>
+                    <span class="stat-label">Years in Hospitality</span>
+                </div>
+                <div class="stat-item reveal">
+                    <span class="stat-number" data-target="18">0</span><span class="stat-suffix">+</span>
+                    <span class="stat-label">Core Competencies</span>
+                </div>
+                <div class="stat-item reveal">
+                    <span class="stat-number" data-target="50">0</span><span class="stat-suffix">+</span>
+                    <span class="stat-label">Operational Frameworks</span>
+                </div>
+                <div class="stat-item reveal">
+                    <span class="stat-number" data-target="100">0</span><span class="stat-suffix">%</span>
+                    <span class="stat-label">Systems-First Approach</span>
+                </div>
             </div>
-            <div class="skills-wrapper">
-                <div class="skill-badge">Restaurant Operations Strategy</div>
-                <div class="skill-badge">Restaurant Systems Engineering</div>
-                <div class="skill-badge">Menu Engineering</div>
-                <div class="skill-badge">Kitchen Workflow Design</div>
-                <div class="skill-badge">Restaurant Audits</div>
-                <div class="skill-badge">Operational Excellence</div>
-                <div class="skill-badge">Cost Control</div>
-                <div class="skill-badge">Recipe Costing</div>
-                <div class="skill-badge">Inventory Systems</div>
-                <div class="skill-badge">Supplier Coordination</div>
-                <div class="skill-badge">Food Safety Systems</div>
-                <div class="skill-badge">SOP Development</div>
-                <div class="skill-badge">Business Process Improvement</div>
-                <div class="skill-badge">Hospitality Technology</div>
-                <div class="skill-badge">Restaurant Automation</div>
-                <div class="skill-badge">Artificial Intelligence for Hospitality</div>
-                <div class="skill-badge">Digital Restaurant Operations</div>
-                <div class="skill-badge">Management Reporting</div>
-            </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Chronology Track -->
-        <section id="journey">
-            <div class="section-header" style="text-align: center;">
-                <span class="section-subtitle">Chronology</span>
-                <h2 class="section-title">Professional Journey</h2>
+    <!-- ═══════════════ CORE EXPERTISE ═══════════════ -->
+    <section class="section" id="expertise">
+        <div class="container">
+            <div class="section-label reveal">
+                <span class="label-line"></span>
+                <span>Expertise</span>
             </div>
+            <h2 class="section-title reveal">Core Expertise</h2>
+            <p class="section-subtitle reveal">Comprehensive capabilities spanning operations, systems, technology, and strategic consulting.</p>
+            <div class="expertise-grid">
+                <div class="expertise-card glass-card reveal" data-tilt>
+                    <div class="expertise-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 20V10M18 20V4M6 20v-4"/></svg>
+                    </div>
+                    <h3>Restaurant Operations Strategy</h3>
+                </div>
+                <div class="expertise-card glass-card reveal" data-tilt>
+                    <div class="expertise-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+                    </div>
+                    <h3>Restaurant Systems Engineering</h3>
+                </div>
+                <div class="expertise-card glass-card reveal" data-tilt>
+                    <div class="expertise-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg>
+                    </div>
+                    <h3>Menu Engineering</h3>
+                </div>
+                <div class="expertise-card glass-card reveal" data-tilt>
+                    <div class="expertise-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                    </div>
+                    <h3>Kitchen Workflow Design</h3>
+                </div>
+                <div class="expertise-card glass-card reveal" data-tilt>
+                    <div class="expertise-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+                    </div>
+                    <h3>Restaurant Audits</h3>
+                </div>
+                <div class="expertise-card glass-card reveal" data-tilt>
+                    <div class="expertise-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                    </div>
+                    <h3>Operational Excellence</h3>
+                </div>
+                <div class="expertise-card glass-card reveal" data-tilt>
+                    <div class="expertise-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+                    </div>
+                    <h3>Cost Control</h3>
+                </div>
+                <div class="expertise-card glass-card reveal" data-tilt>
+                    <div class="expertise-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
+                    </div>
+                    <h3>Recipe Costing</h3>
+                </div>
+                <div class="expertise-card glass-card reveal" data-tilt>
+                    <div class="expertise-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
+                    </div>
+                    <h3>Inventory Systems</h3>
+                </div>
+                <div class="expertise-card glass-card reveal" data-tilt>
+                    <div class="expertise-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+                    </div>
+                    <h3>Supplier Coordination</h3>
+                </div>
+                <div class="expertise-card glass-card reveal" data-tilt>
+                    <div class="expertise-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    </div>
+                    <h3>Food Safety Systems</h3>
+                </div>
+                <div class="expertise-card glass-card reveal" data-tilt>
+                    <div class="expertise-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                    </div>
+                    <h3>SOP Development</h3>
+                </div>
+                <div class="expertise-card glass-card reveal" data-tilt>
+                    <div class="expertise-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                    </div>
+                    <h3>Business Process Improvement</h3>
+                </div>
+                <div class="expertise-card glass-card reveal" data-tilt>
+                    <div class="expertise-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M9 1v3M15 1v3M9 20v3M15 20v3M20 9h3M20 14h3M1 9h3M1 14h3"/></svg>
+                    </div>
+                    <h3>Hospitality Technology</h3>
+                </div>
+                <div class="expertise-card glass-card reveal" data-tilt>
+                    <div class="expertise-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+                    </div>
+                    <h3>Restaurant Automation</h3>
+                </div>
+                <div class="expertise-card glass-card reveal" data-tilt>
+                    <div class="expertise-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                    </div>
+                    <h3>AI for Hospitality</h3>
+                </div>
+                <div class="expertise-card glass-card reveal" data-tilt>
+                    <div class="expertise-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                    </div>
+                    <h3>Digital Restaurant Operations</h3>
+                </div>
+                <div class="expertise-card glass-card reveal" data-tilt>
+                    <div class="expertise-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
+                    </div>
+                    <h3>Management Reporting</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════ JOURNEY SECTION ═══════════════ -->
+    <section class="section section-dark" id="journey">
+        <div class="container">
+            <div class="section-label reveal">
+                <span class="label-line"></span>
+                <span>Journey</span>
+            </div>
+            <h2 class="section-title reveal">My Journey</h2>
+            <p class="section-subtitle reveal">A trajectory defined by growth, initiative, and systems thinking.</p>
             <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-badge"></div>
-                    <span class="timeline-year">2018</span>
-                    <div class="timeline-content">
-                        <h3>ACCA Financial Studies Initiation</h3>
-                        <p style="color: var(--text-muted); margin-top: 0.5rem;">Developed a comprehensive analytics baseline covering corporate cost accounting, business analysis metrics, complex financial reporting paradigms, and core corporate business management.</p>
+                <div class="timeline-line"></div>
+
+                <div class="timeline-item reveal">
+                    <div class="timeline-marker">
+                        <span class="timeline-year">2018</span>
+                    </div>
+                    <div class="timeline-content glass-card">
+                        <h3>Academic Foundation</h3>
+                        <p>Started ACCA studies. Developed a strong understanding of accounting, business analysis, costing, financial reporting, and business management.</p>
                     </div>
                 </div>
-                <div class="timeline-item">
-                    <div class="timeline-badge"></div>
-                    <span class="timeline-year">2019</span>
-                    <div class="timeline-content">
-                        <h3>Uptown Burgery Strategy Scale</h3>
-                        <p style="color: var(--text-muted); margin-top: 0.5rem;">Began in an operational execution role, ascending directly to General Restaurant Manager within 6 months. Supervised total end-to-end operational flows, inventory tracking, supply lines, and reporting structures.</p>
+
+                <div class="timeline-item reveal">
+                    <div class="timeline-marker">
+                        <span class="timeline-year">2019</span>
+                    </div>
+                    <div class="timeline-content glass-card">
+                        <h3>Uptown Burgery</h3>
+                        <p>Joined Uptown Burgery in an operational role. Promoted to Restaurant Manager within six months. Responsible for restaurant operations, inventory, supplier coordination, staff supervision, reporting, customer service, and operational improvements.</p>
                     </div>
                 </div>
-                <div class="timeline-item">
-                    <div class="timeline-badge"></div>
-                    <span class="timeline-year">2019</span>
-                    <div class="timeline-content">
-                        <h3>Gustavo Food Engineering Genesis</h3>
-                        <p style="color: var(--text-muted); margin-top: 0.5rem;">Founded the platform with a critical mission: empowering modern hospitality environments to achieve superior efficiency models utilizing pure systems thinking architectures.</p>
+
+                <div class="timeline-item reveal">
+                    <div class="timeline-marker">
+                        <span class="timeline-year">2019</span>
+                    </div>
+                    <div class="timeline-content glass-card">
+                        <h3>Gustavo Food Engineering — Founded</h3>
+                        <p><strong>Mission:</strong> Helping restaurants become operationally efficient through systems thinking.</p>
                     </div>
                 </div>
-                <div class="timeline-item">
-                    <div class="timeline-badge"></div>
-                    <span class="timeline-year">2019 — Present</span>
-                    <div class="timeline-content">
-                        <h3>Strategic Optimization Portfolio</h3>
-                        <p style="color: var(--text-muted); margin-top: 0.5rem;">Executed continuous operational improvements globally, managing menu engineering algorithms, digital SOP generation libraries, and high-yield hospitality innovation models.</p>
+
+                <div class="timeline-item reveal">
+                    <div class="timeline-marker">
+                        <span class="timeline-year">2019–Present</span>
+                    </div>
+                    <div class="timeline-content glass-card">
+                        <h3>Operational Consulting & Innovation</h3>
+                        <p>Worked on multiple restaurant operational improvement initiatives involving menu engineering, operational documentation, kitchen workflow optimization, food safety systems, process improvement, cost analysis, restaurant administration, and hospitality innovation.</p>
                     </div>
                 </div>
-                <div class="timeline-item">
-                    <div class="timeline-badge"></div>
-                    <span class="timeline-year">2023</span>
-                    <div class="timeline-content">
-                        <h3>UAE Market Expansion</h3>
-                        <p style="color: var(--text-muted); margin-top: 0.5rem;">Scaled operational consulting strategies into the competitive United Arab Emirates luxury hospitality landscape, designing next-generation digital ecosystem solutions.</p>
+
+                <div class="timeline-item reveal">
+                    <div class="timeline-marker">
+                        <span class="timeline-year">2023</span>
+                    </div>
+                    <div class="timeline-content glass-card">
+                        <h3>UAE Expansion</h3>
+                        <p>Expanded professional journey into the UAE hospitality market, continuing to develop restaurant consulting concepts and future-focused operational solutions.</p>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Philosophical Focus Quote -->
-        <section class="fullscreen-quote">
-            <div class="quote-text">
-                "I don't repeatedly solve operational problems. <br><span style="color: var(--accent-gold);">I redesign the systems that create them.</span>"
+    <!-- ═══════════════ GUSTAVO SECTION ═══════════════ -->
+    <section class="section" id="gustavo">
+        <div class="container">
+            <div class="section-label reveal">
+                <span class="label-line"></span>
+                <span>Gustavo</span>
             </div>
-            <span style="font-size: 0.85rem; letter-spacing: 0.3em; color: var(--accent-copper); text-transform: uppercase;">— Philosophical Directive</span>
-        </section>
+            <div class="gustavo-hero reveal">
+                <h2 class="gustavo-title">Gustavo Food Engineering</h2>
+                <p class="gustavo-mission">Engineering operational excellence for hospitality businesses through intelligent systems, structured workflows, and continuous improvement.</p>
+            </div>
+            <div class="gustavo-services-grid">
+                <div class="gustavo-service-card reveal">
+                    <div class="service-number">01</div>
+                    <h3>Restaurant Operations Consulting</h3>
+                </div>
+                <div class="gustavo-service-card reveal">
+                    <div class="service-number">02</div>
+                    <h3>Operational Audits</h3>
+                </div>
+                <div class="gustavo-service-card reveal">
+                    <div class="service-number">03</div>
+                    <h3>Menu Engineering</h3>
+                </div>
+                <div class="gustavo-service-card reveal">
+                    <div class="service-number">04</div>
+                    <h3>Kitchen Planning</h3>
+                </div>
+                <div class="gustavo-service-card reveal">
+                    <div class="service-number">05</div>
+                    <h3>SOP Development</h3>
+                </div>
+                <div class="gustavo-service-card reveal">
+                    <div class="service-number">06</div>
+                    <h3>Cost Control</h3>
+                </div>
+                <div class="gustavo-service-card reveal">
+                    <div class="service-number">07</div>
+                    <h3>Inventory Optimization</h3>
+                </div>
+                <div class="gustavo-service-card reveal">
+                    <div class="service-number">08</div>
+                    <h3>Food Safety Systems</h3>
+                </div>
+                <div class="gustavo-service-card reveal">
+                    <div class="service-number">09</div>
+                    <h3>Workflow Engineering</h3>
+                </div>
+                <div class="gustavo-service-card reveal">
+                    <div class="service-number">10</div>
+                    <h3>Restaurant Administration</h3>
+                </div>
+                <div class="gustavo-service-card reveal">
+                    <div class="service-number">11</div>
+                    <h3>Process Documentation</h3>
+                </div>
+                <div class="gustavo-service-card reveal">
+                    <div class="service-number">12</div>
+                    <h3>Management Systems</h3>
+                </div>
+            </div>
+        </div>
+    </section>
 
-            <!-- Gustavo Operational Target Block -->
-        <section id="gustavo">
-            <div class="section-header">
-                <span class="section-subtitle">Operational Framework Entity</span>
-                <h2 class="section-title">Gustavo Food Engineering</h2>
+    <!-- ═══════════════ FEATURED PROJECTS ═══════════════ -->
+    <section class="section section-dark" id="projects">
+        <div class="container">
+            <div class="section-label reveal">
+                <span class="label-line"></span>
+                <span>Projects</span>
             </div>
-            <div class="grid-cards">
-                <div class="glass-card">
-                    <h3>Core Corporate Mission</h3>
-                    <p>Engineering operational excellence for hospitality businesses through intelligent systems, structured workflows, and continuous improvement frameworks.</p>
-                </div>
-                <div class="glass-card">
-                    <h3>Engineered Services Architecture</h3>
-                    <p>Comprehensive consulting matrix specializing in cross-functional operational audits, menu structural engineering, kitchen planning metrics, and precise management reporting frameworks.</p>
-                </div>
-            </div>
-        </section>
+            <h2 class="section-title reveal">Featured Projects</h2>
+            <p class="section-subtitle reveal">Concept portfolio demonstrations showcasing strategic thinking and systems design.</p>
 
-        <!-- Concept Project Framework Arrays -->
-        <section id="projects">
-            <div class="section-header">
-                <span class="section-subtitle">Demonstrated Solutions</span>
-                <h2 class="section-title">Featured Projects</h2>
-            </div>
-            <div class="grid-cards">
-                <div class="glass-card">
-                    <h3>Restaurant Operational Excellence Framework</h3>
-                    <p>Designed a complete operational assessment model covering workflow analysis, staffing efficiency, inventory movement, reporting systems, operational bottlenecks, and continuous improvement planning.</p>
+            <div class="projects-grid">
+                <div class="project-card reveal">
+                    <div class="project-image">
+                        <img src="images/restaurant.png" alt="Restaurant Operational Excellence Framework">
+                        <div class="project-overlay">
+                            <span class="project-tag">Strategy</span>
+                        </div>
+                    </div>
+                    <div class="project-body">
+                        <h3>Restaurant Operational Excellence Framework</h3>
+                        <p>Designed a complete operational assessment model covering workflow analysis, staffing efficiency, inventory movement, reporting systems, operational bottlenecks, and continuous improvement planning.</p>
+                    </div>
                 </div>
-                <div class="glass-card">
-                    <h3>Smart Menu Engineering Model</h3>
-                    <p>Developed a structured menu engineering methodology balancing profitability, customer psychology, production efficiency, and operational simplicity.</p>
-                </div>
-                <div class="glass-card">
-                    <h3>Digital Kitchen Workflow System</h3>
-                    <p>Conceptualized a digital workflow framework integrating production flow, communication between stations, quality checkpoints, and kitchen performance monitoring.</p>
-                </div>
-                <div class="glass-card">
-                    <h3>Restaurant Cost Intelligence Dashboard</h3>
-                    <p>Designed a management reporting framework visualizing food cost, inventory trends, purchasing performance, wastage, and operational KPIs.</p>
-                </div>
-                <div class="glass-card">
-                    <h3>SOP Intelligence Library</h3>
-                    <p>Created a structured documentation system organizing operational procedures, hygiene practices, receiving standards, production standards, cleaning schedules, and quality controls.</p>
-                </div>
-                <div class="glass-card">
-                    <h3>Hospitality Digital Transformation Blueprint</h3>
-                    <p>Conceptual consulting framework demonstrating how traditional restaurants can transition toward intelligent operational ecosystems using automation and data-driven management.</p>
-                </div>
-            </div>
-        </section>
 
-        <!-- Advanced Technological Concept Maps -->
-        <section id="technology">
-            <div class="section-header">
-                <span class="section-subtitle">Future Roadmap</span>
-                <h2 class="section-title">Technology Vision</h2>
-            </div>
-            <div class="grid-cards">
-                <div class="glass-card" style="border-top-color: var(--accent-copper);">
-                    <h3>Gustavo POS Platform (Concept Under Development)</h3>
-                    <p>A next-generation restaurant operating ecosystem integrating comprehensive administration, recipe costing algorithms, analytics tracking, inventory intelligence matrices, and real-time staff performance dashboard reporting tools.</p>
+                <div class="project-card reveal">
+                    <div class="project-image">
+                        <img src="images/hospitality.png" alt="Smart Menu Engineering Model">
+                        <div class="project-overlay">
+                            <span class="project-tag">Menu Engineering</span>
+                        </div>
+                    </div>
+                    <div class="project-body">
+                        <h3>Smart Menu Engineering Model</h3>
+                        <p>Developed a structured menu engineering methodology balancing profitability, customer psychology, production efficiency, and operational simplicity.</p>
+                    </div>
                 </div>
-                <div class="glass-card" style="border-top-color: var(--accent-copper);">
-                    <h3>Next-Gen Automation R&D</h3>
-                    <p>Explorations into predictive AI-assisted kitchen infrastructure, active cost variance monitoring systems, digital ecosystem libraries, and hospitality-optimized operational intelligence.</p>
-                </div>
-            </div>
-        </section>
 
-        <!-- Editorial Insights -->
-        <section id="insights">
-            <div class="section-header">
-                <span class="section-subtitle">Thought Leadership</span>
-                <h2 class="section-title">Insights</h2>
-            </div>
-            <div class="blog-grid">
-                <div class="blog-card"><h4>Engineering Restaurant Excellence</h4></div>
-                <div class="blog-card"><h4>Why SOPs Matter More Than Recipes</h4></div>
-                <div class="blog-card"><h4>Systems vs Management</h4></div>
-                <div class="blog-card"><h4>Future of AI in Hospitality</h4></div>
-                <div class="blog-card"><h4>Menu Engineering Beyond Pricing</h4></div>
-                <div class="blog-card"><h4>Building Restaurants That Scale</h4></div>
-            </div>
-        </section>
-
-        <!-- Unified Premium Interface Form -->
-        <section id="contact">
-            <div class="section-header">
-                <span class="section-subtitle">Initiate Engagement</span>
-                <h2 class="section-title">Let's Connect</h2>
-            </div>
-            <div class="contact-container">
-                <div class="contact-info">
-                    <h3>Salman Ul Farisi</h3>
-                    <p style="color: var(--text-muted); line-height: 1.6;">Available for international system audits, menu architecture design, enterprise transformations, and speaking engagements.</p>
-                    <ul class="contact-details">
-                        <li><strong>Location:</strong> United Arab Emirates</li>
-                        <li><strong>Email:</strong> s.farisi@gustavofoodengineering.placeholder.com</li>
-                        <li><strong>Network:</strong> LinkedIn / Instagram / GitHub Placeholders</li>
-                    </ul>
+                <div class="project-card reveal">
+                    <div class="project-image">
+                        <img src="images/kitchen.png" alt="Digital Kitchen Workflow System">
+                        <div class="project-overlay">
+                            <span class="project-tag">Workflow</span>
+                        </div>
+                    </div>
+                    <div class="project-body">
+                        <h3>Digital Kitchen Workflow System</h3>
+                        <p>Conceptualized a digital workflow framework integrating production flow, communication between stations, quality checkpoints, and kitchen performance monitoring.</p>
+                    </div>
                 </div>
-                <div class="contact-form">
-                    <form action="#" onsubmit="event.preventDefault(); alert('Message systematically queued.');">
-                        <div class="form-group"><input type="text" placeholder="Your Name" required></div>
-                        <div class="form-group"><input type="email" placeholder="Your Corporate Email" required></div>
-                        <div class="form-group"><textarea placeholder="Define Project Intent & Scope" rows="5" required></textarea></div>
-                        <button type="submit" class="btn btn-primary" style="cursor: pointer; width: 100%;">Transmit Message</button>
+
+                <div class="project-card reveal">
+                    <div class="project-image">
+                        <img src="images/dashboard.png" alt="Restaurant Cost Intelligence Dashboard">
+                        <div class="project-overlay">
+                            <span class="project-tag">Analytics</span>
+                        </div>
+                    </div>
+                    <div class="project-body">
+                        <h3>Restaurant Cost Intelligence Dashboard</h3>
+                        <p>Designed a management reporting framework visualizing food cost, inventory trends, purchasing performance, wastage, and operational KPIs.</p>
+                    </div>
+                </div>
+
+                <div class="project-card reveal">
+                    <div class="project-image">
+                        <img src="images/hospitality.png" alt="SOP Intelligence Library">
+                        <div class="project-overlay">
+                            <span class="project-tag">Documentation</span>
+                        </div>
+                    </div>
+                    <div class="project-body">
+                        <h3>SOP Intelligence Library</h3>
+                        <p>Created a structured documentation system organizing operational procedures, hygiene practices, receiving standards, production standards, cleaning schedules, and quality controls.</p>
+                    </div>
+                </div>
+
+                <div class="project-card reveal">
+                    <div class="project-image">
+                        <img src="images/tech-vision.png" alt="Hospitality Digital Transformation Blueprint">
+                        <div class="project-overlay">
+                            <span class="project-tag">Digital Transformation</span>
+                        </div>
+                    </div>
+                    <div class="project-body">
+                        <h3>Hospitality Digital Transformation Blueprint</h3>
+                        <p>Conceptual consulting framework demonstrating how traditional restaurants can transition toward intelligent operational ecosystems using automation and data-driven management.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════ TECHNOLOGY VISION ═══════════════ -->
+    <section class="section" id="tech-vision">
+        <div class="container">
+            <div class="section-label reveal">
+                <span class="label-line"></span>
+                <span>Technology</span>
+            </div>
+            <h2 class="section-title reveal">Technology Vision</h2>
+
+            <div class="tech-hero reveal">
+                <div class="tech-hero-image">
+                    <img src="images/tech-vision.png" alt="Gustavo POS Concept">
+                    <div class="tech-hero-overlay"></div>
+                </div>
+                <div class="tech-hero-content">
+                    <div class="tech-badge">Concept Under Development</div>
+                    <h3 class="tech-product-name">Gustavo POS</h3>
+                    <p>A next-generation restaurant operating ecosystem integrating administration, analytics, and intelligence.</p>
+                </div>
+            </div>
+
+            <div class="tech-features-grid">
+                <div class="tech-feature reveal">
+                    <span class="tech-feature-dot"></span>
+                    Restaurant Administration
+                </div>
+                <div class="tech-feature reveal">
+                    <span class="tech-feature-dot"></span>
+                    Recipe Costing
+                </div>
+                <div class="tech-feature reveal">
+                    <span class="tech-feature-dot"></span>
+                    Food Cost Analytics
+                </div>
+                <div class="tech-feature reveal">
+                    <span class="tech-feature-dot"></span>
+                    Inventory Intelligence
+                </div>
+                <div class="tech-feature reveal">
+                    <span class="tech-feature-dot"></span>
+                    Purchasing Management
+                </div>
+                <div class="tech-feature reveal">
+                    <span class="tech-feature-dot"></span>
+                    Kitchen Operations
+                </div>
+                <div class="tech-feature reveal">
+                    <span class="tech-feature-dot"></span>
+                    Management Dashboards
+                </div>
+                <div class="tech-feature reveal">
+                    <span class="tech-feature-dot"></span>
+                    Operational Reporting
+                </div>
+                <div class="tech-feature reveal">
+                    <span class="tech-feature-dot"></span>
+                    Staff Performance
+                </div>
+                <div class="tech-feature reveal">
+                    <span class="tech-feature-dot"></span>
+                    Business Intelligence
+                </div>
+                <div class="tech-feature reveal">
+                    <span class="tech-feature-dot"></span>
+                    Decision Support
+                </div>
+            </div>
+
+            <div class="future-concepts reveal">
+                <h3 class="future-title">Future Concepts</h3>
+                <div class="future-grid">
+                    <div class="future-item glass-card">Restaurant Automation</div>
+                    <div class="future-item glass-card">AI-assisted Kitchen Ops</div>
+                    <div class="future-item glass-card">Digital SOP Management</div>
+                    <div class="future-item glass-card">Operational Intelligence</div>
+                    <div class="future-item glass-card">Predictive Inventory</div>
+                    <div class="future-item glass-card">Smart Cost Monitoring</div>
+                    <div class="future-item glass-card">Hospitality Analytics</div>
+                    <div class="future-item glass-card">Digital Restaurant Ecosystem</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════ PHILOSOPHY FULL SCREEN ═══════════════ -->
+    <section class="section philosophy-fullscreen" id="philosophy">
+        <div class="philosophy-bg">
+            <img src="images/kitchen.png" alt="" class="philosophy-bg-img">
+            <div class="philosophy-bg-overlay"></div>
+        </div>
+        <div class="container philosophy-center">
+            <div class="philosophy-quote reveal">
+                <svg class="quote-mark" width="60" height="60" viewBox="0 0 24 24" fill="currentColor" opacity="0.3"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z"/><path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"/></svg>
+                <blockquote>
+                    I don't repeatedly solve operational problems.<br>
+                    <strong>I redesign the systems that create them.</strong>
+                </blockquote>
+                <cite>— Salman Ul Farisi</cite>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════ INSIGHTS ═══════════════ -->
+    <section class="section section-dark" id="insights">
+        <div class="container">
+            <div class="section-label reveal">
+                <span class="label-line"></span>
+                <span>Insights</span>
+            </div>
+            <h2 class="section-title reveal">Insights & Thinking</h2>
+            <p class="section-subtitle reveal">Perspectives on hospitality operations, systems design, and the future of the industry.</p>
+
+            <div class="insights-grid">
+                <article class="insight-card reveal">
+                    <div class="insight-meta">
+                        <span class="insight-category">Operations</span>
+                        <span class="insight-read">5 min read</span>
+                    </div>
+                    <h3>Engineering Restaurant Excellence</h3>
+                    <p>Why the best restaurants aren't run by instinct—they're engineered by design.</p>
+                    <a href="#" class="insight-link">
+                        Read More
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </a>
+                </article>
+
+                <article class="insight-card reveal">
+                    <div class="insight-meta">
+                        <span class="insight-category">Systems</span>
+                        <span class="insight-read">4 min read</span>
+                    </div>
+                    <h3>Why SOPs Matter More Than Recipes</h3>
+                    <p>Recipes create dishes. SOPs create consistent, scalable restaurant operations.</p>
+                    <a href="#" class="insight-link">
+                        Read More
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </a>
+                </article>
+
+                <article class="insight-card reveal">
+                    <div class="insight-meta">
+                        <span class="insight-category">Strategy</span>
+                        <span class="insight-read">6 min read</span>
+                    </div>
+                    <h3>Restaurant Systems vs Restaurant Management</h3>
+                    <p>The fundamental shift from managing problems to designing them out of existence.</p>
+                    <a href="#" class="insight-link">
+                        Read More
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </a>
+                </article>
+
+                <article class="insight-card reveal">
+                    <div class="insight-meta">
+                        <span class="insight-category">Technology</span>
+                        <span class="insight-read">7 min read</span>
+                    </div>
+                    <h3>Future of AI in Hospitality</h3>
+                    <p>How artificial intelligence will reshape kitchen operations, inventory, and guest experiences.</p>
+                    <a href="#" class="insight-link">
+                        Read More
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </a>
+                </article>
+
+                <article class="insight-card reveal">
+                    <div class="insight-meta">
+                        <span class="insight-category">Menu Engineering</span>
+                        <span class="insight-read">5 min read</span>
+                    </div>
+                    <h3>Menu Engineering Beyond Pricing</h3>
+                    <p>A holistic approach to menu design that considers psychology, operations, and profitability.</p>
+                    <a href="#" class="insight-link">
+                        Read More
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </a>
+                </article>
+
+                <article class="insight-card reveal">
+                    <div class="insight-meta">
+                        <span class="insight-category">Growth</span>
+                        <span class="insight-read">6 min read</span>
+                    </div>
+                    <h3>Building Restaurants That Scale</h3>
+                    <p>The operational infrastructure required to grow from one location to many.</p>
+                    <a href="#" class="insight-link">
+                        Read More
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </a>
+                </article>
+
+                <article class="insight-card reveal">
+                    <div class="insight-meta">
+                        <span class="insight-category">Innovation</span>
+                        <span class="insight-read">5 min read</span>
+                    </div>
+                    <h3>Operational Thinking for Hospitality</h3>
+                    <p>Applying systems thinking principles to transform hospitality operations from reactive to proactive.</p>
+                    <a href="#" class="insight-link">
+                        Read More
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </a>
+                </article>
+
+                <article class="insight-card reveal">
+                    <div class="insight-meta">
+                        <span class="insight-category">Automation</span>
+                        <span class="insight-read">8 min read</span>
+                    </div>
+                    <h3>Restaurant Automation: Practical Applications</h3>
+                    <p>Beyond buzzwords—real, implementable automation strategies for modern restaurants.</p>
+                    <a href="#" class="insight-link">
+                        Read More
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </a>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════ VISION ═══════════════ -->
+    <section class="section vision-section" id="vision">
+        <div class="container">
+            <div class="vision-content reveal">
+                <div class="section-label">
+                    <span class="label-line"></span>
+                    <span>Vision</span>
+                </div>
+                <h2 class="section-title">Looking Forward</h2>
+                <p class="vision-text">My vision is to contribute to the future of hospitality by integrating operations, technology, automation, and intelligent systems to help restaurants become more efficient, scalable, and future-ready.</p>
+                <div class="vision-keywords">
+                    <span class="vision-keyword">Operations</span>
+                    <span class="vision-keyword">Technology</span>
+                    <span class="vision-keyword">Automation</span>
+                    <span class="vision-keyword">Intelligence</span>
+                    <span class="vision-keyword">Scalability</span>
+                    <span class="vision-keyword">Innovation</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════ CONTACT ═══════════════ -->
+    <section class="section section-dark" id="contact">
+        <div class="container">
+            <div class="section-label reveal">
+                <span class="label-line"></span>
+                <span>Contact</span>
+            </div>
+            <div class="contact-grid">
+                <div class="contact-info reveal">
+                    <h2 class="section-title">Let's Connect</h2>
+                    <div class="contact-details">
+                        <div class="contact-name">Salman Ul Farisi</div>
+                        <div class="contact-roles">
+                            <span>Operations Strategist</span>
+                            <span>F&B Systems Specialist</span>
+                            <span>Menu Engineer</span>
+                            <span>Restaurant Systems Designer</span>
+                        </div>
+                        <div class="contact-location">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                            United Arab Emirates
+                        </div>
+                        <div class="contact-links">
+                            <a href="mailto:hello@salmanulfarisi.com" class="contact-link-item">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                                <span>hello@salmanulfarisi.com</span>
+                            </a>
+                            <a href="#" class="contact-link-item">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+                                <span>LinkedIn</span>
+                            </a>
+                            <a href="#" class="contact-link-item">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                                <span>Instagram</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form-wrapper reveal">
+                    <form class="contact-form glass-card" id="contactForm">
+                        <div class="form-group">
+                            <input type="text" id="formName" placeholder=" " required>
+                            <label for="formName">Your Name</label>
+                            <div class="form-line"></div>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" id="formEmail" placeholder=" " required>
+                            <label for="formEmail">Your Email</label>
+                            <div class="form-line"></div>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="formSubject" placeholder=" ">
+                            <label for="formSubject">Subject</label>
+                            <div class="form-line"></div>
+                        </div>
+                        <div class="form-group">
+                            <textarea id="formMessage" rows="4" placeholder=" " required></textarea>
+                            <label for="formMessage">Your Message</label>
+                            <div class="form-line"></div>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-full">
+                            <span>Send Message</span>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                        </button>
                     </form>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <footer>
-            <p>&copy; 2026 Salman Ul Farisi. All Rights Reserved. Engineered for Static Architecture.</p>
-        </footer>
+    <!-- ═══════════════ FOOTER ═══════════════ -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-inner">
+                <div class="footer-brand">
+                    <span class="logo-accent">S</span>UF
+                </div>
+                <p class="footer-text">© 2024 Salman Ul Farisi. All rights reserved.</p>
+                <div class="footer-links">
+                    <a href="#about">About</a>
+                    <a href="#expertise">Expertise</a>
+                    <a href="#projects">Projects</a>
+                    <a href="#contact">Contact</a>
+                </div>
+            </div>
+        </div>
+    </footer>
 
-    </div>
-
-    <!-- WebGL Rendering Libraries -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-
-    <script>
-        // 1. Core Scene Setup
-        const container = document.getElementById('canvas-container');
-        const scene = new THREE.Scene();
-        scene.fog = new THREE.FogExp2(0x0a0a0c, 0.02);
-
-        const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
-        camera.position.set(0, 0, 9);
-
-        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-        container.appendChild(renderer.domElement);
-
-        // 2. Blueprint Infrastructure: Dynamic Dismantling Component Sub-assemblies
-        // We create an array of distinct meshes that will fly apart systematically on scroll.
-        const components = [];
-        const componentCount = 5; 
-        const materials = [
-            new THREE.MeshBasicMaterial({ color: 0xd4af37, wireframe: true, transparent: true, opacity: 0.2 }), // Gold Core
-            new THREE.MeshBasicMaterial({ color: 0xb87333, wireframe: true, transparent: true, opacity: 0.15 }), // Copper Shell
-            new THREE.MeshBasicMaterial({ color: 0xaaaaaa, wireframe: true, transparent: true, opacity: 0.1 }), // Grey Matrix
-            new THREE.MeshBasicMaterial({ color: 0xd4af37, wireframe: true, transparent: true, opacity: 0.1 }), // Outer Perimeter
-            new THREE.MeshBasicMaterial({ color: 0xb87333, wireframe: true, transparent: true, opacity: 0.2 })  // Automation Node
-        ];
-
-        // Construct programmatic system nodes nested in one spot inside the engine
-        for (let i = 0; i < componentCount; i++) {
-            let geometry;
-            if (i === 0) geometry = new THREE.SphereGeometry(1.2, 12, 12);
-            else if (i === 1) geometry = new THREE.TorusGeometry(2, 0.15, 8, 24);
-            else if (i === 2) geometry = new THREE.CylinderGeometry(2.5, 2.5, 0.5, 6, 1, true);
-            else if (i === 3) geometry = new THREE.IcosahedronGeometry(3.5, 0);
-            else geometry = new THREE.TorusGeometry(4.5, 0.05, 4, 32);
-
-            const mesh = new THREE.Mesh(geometry, materials[i]);
-            scene.add(mesh);
-            
-            // Store baseline direction vectors determining exactly how each piece separates (Exploded View Vector)
-            components.push({
-                mesh: mesh,
-                direction: new THREE.Vector3(
-                    (Math.random() - 0.5) * 3, 
-                    (Math.random() - 0.5) * 3, 
-                    (Math.random() - 0.5) * 2
-                ),
-                baseRotationSpeed: {
-                    x: (Math.random() - 0.5) * 0.02,
-                    y: (Math.random() - 0.5) * 0.02
-                }
-            });
-        }
-
-        // Deep-space ambiance tracking dots
-        const starGeo = new THREE.BufferGeometry();
-        const starCount = 600;
-        const starPositions = new Float32Array(starCount * 3);
-        for(let i=0; i<starCount*3; i++) { starPositions[i] = (Math.random() - 0.5) * 25; }
-        starGeo.setAttribute('position', new THREE.BufferAttribute(starPositions, 3));
-        const starMat = new THREE.PointsMaterial({ color: 0xb87333, size: 0.02, transparent: true, opacity: 0.4 });
-        const stars = new THREE.Points(starGeo, starMat);
-        scene.add(stars);
-
-        // 3. Scroll Integration & Calculation Engine
-        let scrollPercent = 0;
-        let targetScroll = 0;
-
-        window.addEventListener('scroll', () => {
-            const h = document.documentElement, 
-                  b = document.body,
-                  st = 'scrollTop',
-                  sh = 'scrollHeight';
-            
-            // Calculate total scroll completion percentage mathematically (0 to 1)
-            targetScroll = (h[st] || b[st]) / ((h[sh] || b[sh]) - h.clientHeight);
-
-            // Visibility Trigger Engine
-            document.querySelectorAll('section').forEach(sec => {
-                const top = sec.getBoundingClientRect().top;
-                if(top < window.innerHeight * 0.8) {
-                    sec.classList.add('visible');
-                }
-            });
-        });
-
-        // Mouse Interactivity tracking variables
-        let mouseX = 0, mouseY = 0;
-        window.addEventListener('mousemove', (e) => {
-            mouseX = (e.clientX / window.innerWidth) - 0.5;
-            mouseY = (e.clientY / window.innerHeight) - 0.5;
-        });
-
-        // 4. Real-time Fluid Interpolation Pipeline (Animation Loop)
-        const clock = new THREE.Clock();
-
-        const animate = () => {
-            requestAnimationFrame(animate);
-            const time = clock.getElapsedTime();
-
-            // Smooth linear interpolation (lerp) for friction physics on scroll actions
-            scrollPercent += (targetScroll - scrollPercent) * 0.07;
-
-            // Dismantle/Explode every component outwards based on scroll position progress
-            components.forEach((comp, idx) => {
-                // Base continuous architectural spin
-                comp.mesh.rotation.x += comp.baseRotationSpeed.x;
-                comp.mesh.rotation.y += comp.baseRotationSpeed.y;
-
-                // Exploded View Expansion logic matching F1 dismantling sequences
-                // Components shift dynamically down their target vector paths as scrollPercent rises
-                comp.mesh.position.x = comp.direction.x * scrollPercent * 4.5;
-                comp.mesh.position.y = comp.direction.y * scrollPercent * 4.5;
-                comp.mesh.position.z = comp.direction.z * scrollPercent * 3.0;
-
-                // Amplify spin velocity dynamically during active deconstructions
-                comp.mesh.rotation.z = scrollPercent * (idx + 1) * 0.5;
-            });
-
-            // Ambient background star rotation
-            stars.rotation.y = time * 0.01;
-            
-            // Subtle parallax response to mouse coordinates
-            scene.position.x += (mouseX * 0.5 - scene.position.x) * 0.05;
-            scene.position.y += (-mouseY * 0.5 - scene.position.y) * 0.05;
-
-            renderer.render(scene, camera);
-        };
-        animate();
-
-        // 5. Global Viewport Scaler
-        window.addEventListener('resize', () => {
-            camera.aspect = window.innerWidth / window.innerHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(window.innerWidth, window.innerHeight);
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
