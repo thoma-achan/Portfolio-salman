@@ -1,18 +1,49 @@
 /* ═══════════════════════════════════════════════════════════════
-   SALMAN UL FARISI — PORTFOLIO
-   Interactive JavaScript Engine
+   SALMAN UL FARISI — PORTFOLIO V2
+   NEON RED INTERACTIVE ENGINE
    ═══════════════════════════════════════════════════════════════ */
 
 document.addEventListener('DOMContentLoaded', () => {
+    initCursorGlow();
     initNavigation();
     initHeroTyping();
     initHeroCanvas();
     initRevealAnimations();
     initAnimatedCounters();
     initContactForm();
-    initTiltCards();
     initParallax();
 });
+
+/* ═══════════════════════════════════════════════════════════════
+   CURSOR GLOW — Neon red ambient light following cursor
+   ═══════════════════════════════════════════════════════════════ */
+
+function initCursorGlow() {
+    const glow = document.getElementById('cursorGlow');
+    if (!glow || window.innerWidth < 768) return;
+
+    let mouseX = 0, mouseY = 0;
+    let glowX = 0, glowY = 0;
+
+    document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        glow.classList.add('active');
+    });
+
+    document.addEventListener('mouseleave', () => {
+        glow.classList.remove('active');
+    });
+
+    function animate() {
+        glowX += (mouseX - glowX) * 0.08;
+        glowY += (mouseY - glowY) * 0.08;
+        glow.style.left = glowX + 'px';
+        glow.style.top = glowY + 'px';
+        requestAnimationFrame(animate);
+    }
+    animate();
+}
 
 /* ═══════════════════════════════════════════════════════════════
    NAVIGATION
@@ -23,21 +54,15 @@ function initNavigation() {
     const toggle = document.getElementById('navToggle');
     const links = document.getElementById('navLinks');
 
-    // Scroll state
-    let lastScroll = 0;
     window.addEventListener('scroll', () => {
-        const currentScroll = window.pageYOffset;
-        nav.classList.toggle('scrolled', currentScroll > 50);
-        lastScroll = currentScroll;
+        nav.classList.toggle('scrolled', window.pageYOffset > 60);
     }, { passive: true });
 
-    // Mobile toggle
     toggle.addEventListener('click', () => {
         toggle.classList.toggle('active');
         links.classList.toggle('active');
     });
 
-    // Close mobile menu on link click
     links.querySelectorAll('a').forEach(link => {
         link.addEventListener('click', () => {
             toggle.classList.remove('active');
@@ -45,22 +70,23 @@ function initNavigation() {
         });
     });
 
-    // Smooth scroll
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', (e) => {
             e.preventDefault();
             const target = document.querySelector(anchor.getAttribute('href'));
             if (target) {
                 const offset = 80;
-                const top = target.getBoundingClientRect().top + window.pageYOffset - offset;
-                window.scrollTo({ top, behavior: 'smooth' });
+                window.scrollTo({
+                    top: target.getBoundingClientRect().top + window.pageYOffset - offset,
+                    behavior: 'smooth'
+                });
             }
         });
     });
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   HERO TYPING ANIMATION
+   HERO TYPING — Neon role switcher
    ═══════════════════════════════════════════════════════════════ */
 
 function initHeroTyping() {
@@ -71,44 +97,44 @@ function initHeroTyping() {
         'Restaurant Systems Designer'
     ];
 
-    const element = document.getElementById('typedRole');
-    if (!element) return;
+    const el = document.getElementById('typedRole');
+    if (!el) return;
 
-    let roleIndex = 0;
-    let charIndex = 0;
-    let isDeleting = false;
-    let typingSpeed = 80;
+    let roleIdx = 0;
+    let charIdx = 0;
+    let deleting = false;
+    let speed = 70;
 
-    function type() {
-        const currentRole = roles[roleIndex];
+    function tick() {
+        const current = roles[roleIdx];
 
-        if (isDeleting) {
-            element.textContent = currentRole.substring(0, charIndex - 1);
-            charIndex--;
-            typingSpeed = 40;
+        if (deleting) {
+            el.textContent = current.substring(0, charIdx - 1);
+            charIdx--;
+            speed = 30;
         } else {
-            element.textContent = currentRole.substring(0, charIndex + 1);
-            charIndex++;
-            typingSpeed = 80;
+            el.textContent = current.substring(0, charIdx + 1);
+            charIdx++;
+            speed = 70;
         }
 
-        if (!isDeleting && charIndex === currentRole.length) {
-            typingSpeed = 2500;
-            isDeleting = true;
-        } else if (isDeleting && charIndex === 0) {
-            isDeleting = false;
-            roleIndex = (roleIndex + 1) % roles.length;
-            typingSpeed = 500;
+        if (!deleting && charIdx === current.length) {
+            speed = 2800;
+            deleting = true;
+        } else if (deleting && charIdx === 0) {
+            deleting = false;
+            roleIdx = (roleIdx + 1) % roles.length;
+            speed = 400;
         }
 
-        setTimeout(type, typingSpeed);
+        setTimeout(tick, speed);
     }
 
-    setTimeout(type, 1000);
+    setTimeout(tick, 800);
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   HERO CANVAS — Network Animation
+   HERO CANVAS — Neon red particle network
    ═══════════════════════════════════════════════════════════════ */
 
 function initHeroCanvas() {
@@ -138,16 +164,15 @@ function initHeroCanvas() {
         mouse.y = null;
     });
 
-    // Create particles
-    const particleCount = Math.min(80, Math.floor(window.innerWidth / 20));
-    for (let i = 0; i < particleCount; i++) {
+    const count = Math.min(90, Math.floor(window.innerWidth / 18));
+    for (let i = 0; i < count; i++) {
         particles.push({
             x: Math.random() * canvas.width,
             y: Math.random() * canvas.height,
-            vx: (Math.random() - 0.5) * 0.4,
-            vy: (Math.random() - 0.5) * 0.4,
+            vx: (Math.random() - 0.5) * 0.5,
+            vy: (Math.random() - 0.5) * 0.5,
             size: Math.random() * 2 + 0.5,
-            opacity: Math.random() * 0.5 + 0.1
+            opacity: Math.random() * 0.6 + 0.1
         });
     }
 
@@ -155,46 +180,65 @@ function initHeroCanvas() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
         particles.forEach((p, i) => {
-            // Update position
             p.x += p.vx;
             p.y += p.vy;
 
-            // Wrap around
             if (p.x < 0) p.x = canvas.width;
             if (p.x > canvas.width) p.x = 0;
             if (p.y < 0) p.y = canvas.height;
             if (p.y > canvas.height) p.y = 0;
 
-            // Mouse interaction
+            // Mouse repulsion
             if (mouse.x !== null) {
                 const dx = mouse.x - p.x;
                 const dy = mouse.y - p.y;
                 const dist = Math.sqrt(dx * dx + dy * dy);
-                if (dist < 200) {
-                    p.x -= dx * 0.005;
-                    p.y -= dy * 0.005;
+                if (dist < 180) {
+                    const force = (180 - dist) / 180;
+                    p.x -= dx * force * 0.008;
+                    p.y -= dy * force * 0.008;
                 }
             }
 
-            // Draw particle
+            // Draw particle with neon glow
             ctx.beginPath();
             ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-            ctx.fillStyle = `rgba(184, 115, 51, ${p.opacity})`;
+            ctx.fillStyle = `rgba(255, 0, 51, ${p.opacity})`;
+            ctx.shadowColor = 'rgba(255, 0, 51, 0.3)';
+            ctx.shadowBlur = 8;
             ctx.fill();
+            ctx.shadowBlur = 0;
 
-            // Draw connections
+            // Connections
             for (let j = i + 1; j < particles.length; j++) {
                 const p2 = particles[j];
                 const dx = p.x - p2.x;
                 const dy = p.y - p2.y;
                 const dist = Math.sqrt(dx * dx + dy * dy);
 
-                if (dist < 150) {
+                if (dist < 140) {
                     ctx.beginPath();
                     ctx.moveTo(p.x, p.y);
                     ctx.lineTo(p2.x, p2.y);
-                    const alpha = (1 - dist / 150) * 0.15;
-                    ctx.strokeStyle = `rgba(184, 115, 51, ${alpha})`;
+                    const alpha = (1 - dist / 140) * 0.12;
+                    ctx.strokeStyle = `rgba(255, 0, 51, ${alpha})`;
+                    ctx.lineWidth = 0.5;
+                    ctx.stroke();
+                }
+            }
+
+            // Mouse connections
+            if (mouse.x !== null) {
+                const dx = mouse.x - p.x;
+                const dy = mouse.y - p.y;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+
+                if (dist < 200) {
+                    ctx.beginPath();
+                    ctx.moveTo(p.x, p.y);
+                    ctx.lineTo(mouse.x, mouse.y);
+                    const alpha = (1 - dist / 200) * 0.15;
+                    ctx.strokeStyle = `rgba(255, 26, 71, ${alpha})`;
                     ctx.lineWidth = 0.5;
                     ctx.stroke();
                 }
@@ -206,13 +250,9 @@ function initHeroCanvas() {
 
     draw();
 
-    // Clean up on visibility change
     document.addEventListener('visibilitychange', () => {
-        if (document.hidden) {
-            cancelAnimationFrame(animFrame);
-        } else {
-            draw();
-        }
+        if (document.hidden) cancelAnimationFrame(animFrame);
+        else draw();
     });
 }
 
@@ -231,8 +271,8 @@ function initRevealAnimations() {
             }
         });
     }, {
-        threshold: 0.1,
-        rootMargin: '0px 0px -40px 0px'
+        threshold: 0.08,
+        rootMargin: '0px 0px -50px 0px'
     });
 
     reveals.forEach(el => observer.observe(el));
@@ -243,32 +283,29 @@ function initRevealAnimations() {
    ═══════════════════════════════════════════════════════════════ */
 
 function initAnimatedCounters() {
-    const counters = document.querySelectorAll('.stat-number');
+    const counters = document.querySelectorAll('.hs-value');
 
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                animateCounter(entry.target);
+                animateCount(entry.target);
                 observer.unobserve(entry.target);
             }
         });
     }, { threshold: 0.5 });
 
-    counters.forEach(counter => observer.observe(counter));
+    counters.forEach(c => observer.observe(c));
 }
 
-function animateCounter(el) {
+function animateCount(el) {
     const target = parseInt(el.getAttribute('data-target'));
-    const duration = 2000;
+    const duration = 2200;
     const start = performance.now();
-    const easeOutQuart = t => 1 - Math.pow(1 - t, 4);
+    const easeOut = t => 1 - Math.pow(1 - t, 4);
 
-    function update(timestamp) {
-        const elapsed = timestamp - start;
-        const progress = Math.min(elapsed / duration, 1);
-        const easedProgress = easeOutQuart(progress);
-        const current = Math.floor(easedProgress * target);
-        el.textContent = current;
+    function update(ts) {
+        const progress = Math.min((ts - start) / duration, 1);
+        el.textContent = Math.floor(easeOut(progress) * target);
 
         if (progress < 1) {
             requestAnimationFrame(update);
@@ -291,76 +328,48 @@ function initContactForm() {
     form.addEventListener('submit', (e) => {
         e.preventDefault();
 
-        const btn = form.querySelector('.btn-primary');
-        const originalText = btn.innerHTML;
+        const btn = form.querySelector('.btn-neon');
+        const original = btn.innerHTML;
 
         btn.innerHTML = `
-            <span>Message Sent</span>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+            <span class="btn-text">Message Sent ✓</span>
+            <span class="btn-glow"></span>
         `;
-        btn.style.background = 'rgba(52, 199, 89, 0.2)';
-        btn.style.borderColor = 'rgba(52, 199, 89, 0.5)';
-        btn.style.color = '#34c759';
+        btn.style.background = '#00c853';
+        btn.style.boxShadow = '0 0 30px rgba(0, 200, 83, 0.4)';
 
         setTimeout(() => {
-            btn.innerHTML = originalText;
+            btn.innerHTML = original;
             btn.style.background = '';
-            btn.style.borderColor = '';
-            btn.style.color = '';
+            btn.style.boxShadow = '';
             form.reset();
         }, 3000);
     });
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   TILT CARDS (Subtle 3D hover)
-   ═══════════════════════════════════════════════════════════════ */
-
-function initTiltCards() {
-    const cards = document.querySelectorAll('[data-tilt]');
-
-    cards.forEach(card => {
-        card.addEventListener('mousemove', (e) => {
-            const rect = card.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            const centerX = rect.width / 2;
-            const centerY = rect.height / 2;
-            const rotateX = (y - centerY) / centerY * -4;
-            const rotateY = (x - centerX) / centerX * 4;
-
-            card.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
-        });
-
-        card.addEventListener('mouseleave', () => {
-            card.style.transform = '';
-        });
-    });
-}
-
-/* ═══════════════════════════════════════════════════════════════
-   PARALLAX EFFECT
+   PARALLAX
    ═══════════════════════════════════════════════════════════════ */
 
 function initParallax() {
     const heroImg = document.querySelector('.hero-bg-img');
-    const philosophyImg = document.querySelector('.philosophy-bg-img');
+    const philImg = document.querySelector('.phil-bg-img');
 
-    if (!heroImg && !philosophyImg) return;
+    if (!heroImg && !philImg) return;
 
     window.addEventListener('scroll', () => {
         const scrollY = window.pageYOffset;
 
         if (heroImg && scrollY < window.innerHeight) {
-            heroImg.style.transform = `translateY(${scrollY * 0.3}px) scale(1.1)`;
+            heroImg.style.transform = `translateY(${scrollY * 0.25}px) scale(1.1)`;
         }
 
-        if (philosophyImg) {
-            const section = document.querySelector('.philosophy-fullscreen');
+        if (philImg) {
+            const section = document.querySelector('.philosophy-break');
             const rect = section.getBoundingClientRect();
             if (rect.top < window.innerHeight && rect.bottom > 0) {
-                const offset = (rect.top / window.innerHeight) * 40;
-                philosophyImg.style.transform = `translateY(${offset}px) scale(1.1)`;
+                const offset = (rect.top / window.innerHeight) * 30;
+                philImg.style.transform = `translateY(${offset}px) scale(1.1)`;
             }
         }
     }, { passive: true });
